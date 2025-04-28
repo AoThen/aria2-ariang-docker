@@ -2,6 +2,29 @@
   <img src="https://raw.githubusercontent.com/mayswind/AriaNg-Native/master/assets/AriaNg.ico" />
 </p>
 
+
+
+# 
+
+打开网页，AriaNg 设置，RPC，设置协议为WebSocket，端口设置为8189
+
+```yaml
+services:
+  ariang:
+    image: ghcr.io/aothen/aria2-ariang-docker:latest
+    ports:
+      - 8189:8080
+    volumes:
+      - ./DOWNLOAD:/aria2/data
+      - ./CONFIG_DIR:/aria2/conf
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+```
+
+
 # [Aria2](https://github.com/aria2/aria2) + [AriaNg webui](https://github.com/mayswind/AriaNg) inside a [docker container](https://hub.docker.com/r/hurlenko/aria2-ariang)
 
 [![Latest Github release](https://img.shields.io/github/release/hurlenko/aria2-ariang-docker.svg)](https://github.com/hurlenko/aria2-ariang-docker/releases/latest)
