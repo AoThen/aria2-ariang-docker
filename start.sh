@@ -50,5 +50,13 @@ chown -R "$userid":"$groupid" $conf_path
 chown -R "$userid":"$groupid" $data_path
 chown -R "$userid":"$groupid" /usr/local/caddy/Caddyfile
 
-caddy start -c /usr/local/caddy/Caddyfile
+if [ ! -f /usr/local/caddy/Caddyfile ]; then
+  echo "ERROR: Caddyfile not found at /usr/local/caddy/Caddyfile"
+  exit 1
+else
+  echo "Caddyfile found successfully"
+fi
+
+su-exec "$userid":"$groupid" caddy start -c /usr/local/caddy/Caddyfile
+#caddy start --config /usr/local/caddy/Caddyfile
 su-exec "$userid":"$groupid" aria2c "$@"
